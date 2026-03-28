@@ -264,18 +264,18 @@ export function Calculator() {
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5 auto-rows-fr"
         >
           {/* Market Inputs */}
-          <motion.div variants={item}>
-            <Card className="bg-card/50 border-border/50 backdrop-blur-sm">
+          <motion.div variants={item} className="flex">
+            <Card className="bg-card/50 border-border/50 backdrop-blur-sm w-full flex flex-col">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground font-medium">
                   <Target className="w-4 h-4" />
                   Market Inputs
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-5">
+              <CardContent className="space-y-5 flex-1">
                 <InputField
                   label="Spot Price"
                   hint="Current index"
@@ -304,15 +304,15 @@ export function Calculator() {
           </motion.div>
 
           {/* Position & Volatility */}
-          <motion.div variants={item}>
-            <Card className="bg-card/50 border-border/50 backdrop-blur-sm">
+          <motion.div variants={item} className="flex">
+            <Card className="bg-card/50 border-border/50 backdrop-blur-sm w-full flex flex-col">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground font-medium">
                   <Activity className="w-4 h-4" />
                   Position & Volatility
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-5">
+              <CardContent className="space-y-5 flex-1">
                 <InputField
                   label="Implied Volatility"
                   hint="Annual %"
@@ -365,15 +365,15 @@ export function Calculator() {
           </motion.div>
 
           {/* Volatility Output */}
-          <motion.div variants={item}>
-            <Card className="bg-card/50 border-border/50 backdrop-blur-sm">
+          <motion.div variants={item} className="flex">
+            <Card className="bg-card/50 border-border/50 backdrop-blur-sm w-full flex flex-col">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground font-medium">
                   <TrendingUp className="w-4 h-4" />
                   Volatility Analysis
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1">
                 <div className="space-y-0">
                   <StatRow
                     label="1σ Move"
@@ -406,15 +406,15 @@ export function Calculator() {
           </motion.div>
 
           {/* Probabilities & Payoffs */}
-          <motion.div variants={item}>
-            <Card className="bg-card/50 border-border/50 backdrop-blur-sm">
+          <motion.div variants={item} className="flex">
+            <Card className="bg-card/50 border-border/50 backdrop-blur-sm w-full flex flex-col">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground font-medium">
                   <Layers className="w-4 h-4" />
                   Probabilities & Payoffs
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1">
                 <div className="space-y-0">
                   <StatRow
                     label="Full Profit Prob."
@@ -446,11 +446,11 @@ export function Calculator() {
             </Card>
           </motion.div>
 
-          {/* EV Summary - Full Width */}
-          <motion.div variants={fadeInScale} className="lg:col-span-2">
+          {/* EV Summary - Spans 2 columns on the bottom row */}
+          <motion.div variants={fadeInScale} className="lg:col-span-2 flex">
             <Card
               className={cn(
-                "border backdrop-blur-sm transition-colors duration-500",
+                "border backdrop-blur-sm transition-colors duration-500 w-full flex flex-col",
                 isPositiveEV
                   ? "bg-profit/[0.03] border-profit/20"
                   : "bg-loss/[0.03] border-loss/20"
