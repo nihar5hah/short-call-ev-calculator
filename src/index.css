@@ -1,122 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
-  /* Financial Terminal Color Palette */
-  --color-background: #0a0a0b;
-  --color-surface: #111113;
-  --color-surface-elevated: #18181b;
-  --color-border: #27272a;
-  --color-border-subtle: #1f1f23;
-
-  /* Text */
-  --color-text-primary: #fafafa;
-  --color-text-secondary: #a1a1aa;
-  --color-text-muted: #71717a;
-
-  /* Financial Colors - Industry Standard */
-  --color-profit: #22c55e;
-  --color-profit-muted: #16a34a;
-  --color-loss: #ef4444;
-  --color-loss-muted: #dc2626;
-  --color-neutral: #3b82f6;
-  --color-warning: #eab308;
-
-  /* Accent - Muted Teal for financial feel */
-  --color-accent: #14b8a6;
-  --color-accent-muted: #0d9488;
-
-  /* Fonts */
+@theme inline {
+  --font-sans: "DM Sans", system-ui, sans-serif;
   --font-display: "Instrument Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
-  --font-body: "DM Sans", system-ui, sans-serif;
-
-  /* Spacing */
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-}
-
-@layer base {
-  * {
-    border-color: var(--color-border);
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
-    font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    @apply bg-background text-foreground;
-  }
-
-  /* Custom scrollbar for terminal feel */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--color-surface);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-border);
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-text-muted);
-  }
-  html {
-    @apply font-sans;
-  }
-}
-
-@layer utilities {
-  .font-display {
-    font-family: var(--font-display);
-  }
-
-  .font-mono {
-    font-family: var(--font-mono);
-  }
-
-  .text-profit {
-    color: var(--color-profit);
-  }
-
-  .text-loss {
-    color: var(--color-loss);
-  }
-
-  .text-neutral {
-    color: var(--color-neutral);
-  }
-
-  .bg-profit\/10 {
-    background-color: rgb(34 197 94 / 0.1);
-  }
-
-  .bg-loss\/10 {
-    background-color: rgb(239 68 68 / 0.1);
-  }
-
-  /* Number tabular for financial data alignment */
-  .tabular-nums {
-    font-variant-numeric: tabular-nums;
-  }
-}
-
-@theme inline {
-  --font-heading: var(--font-sans);
-  --font-sans: 'Geist Variable', sans-serif;
+  
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -148,80 +40,142 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+  
+  /* Financial specific colors */
+  --color-profit: #22c55e;
+  --color-profit-dim: #16a34a;
+  --color-loss: #ef4444;
+  --color-loss-dim: #dc2626;
+  --color-neutral-blue: #3b82f6;
+  --color-warning: #f59e0b;
+  --color-teal: #14b8a6;
+  
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Financial Terminal Dark Theme */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #0f0f11;
+  --card-foreground: #fafafa;
+  --popover: #0f0f11;
+  --popover-foreground: #fafafa;
+  --primary: #fafafa;
+  --primary-foreground: #09090b;
+  --secondary: #18181b;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #ef4444;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #52525b;
+  --chart-1: #22c55e;
+  --chart-2: #ef4444;
+  --chart-3: #3b82f6;
+  --chart-4: #f59e0b;
+  --chart-5: #14b8a6;
+  --radius: 0.5rem;
+  --sidebar: #0f0f11;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #fafafa;
+  --sidebar-primary-foreground: #09090b;
+  --sidebar-accent: #18181b;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #27272a;
+  --sidebar-ring: #52525b;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans antialiased;
+    font-feature-settings: "ss01", "ss02";
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Custom scrollbar for terminal feel */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #09090b;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+  }
+}
+
+@layer utilities {
+  .text-profit {
+    color: var(--color-profit);
+  }
+
+  .text-loss {
+    color: var(--color-loss);
+  }
+
+  .text-neutral-blue {
+    color: var(--color-neutral-blue);
+  }
+  
+  .text-warning {
+    color: var(--color-warning);
+  }
+
+  .bg-profit-subtle {
+    background-color: rgb(34 197 94 / 0.1);
+  }
+
+  .bg-loss-subtle {
+    background-color: rgb(239 68 68 / 0.1);
+  }
+  
+  .border-profit {
+    border-color: rgb(34 197 94 / 0.3);
+  }
+  
+  .border-loss {
+    border-color: rgb(239 68 68 / 0.3);
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .font-display {
+    font-family: var(--font-display);
+  }
+  
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  
+  /* Subtle grid background */
+  .bg-grid {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
 }

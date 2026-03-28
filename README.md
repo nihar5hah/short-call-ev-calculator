@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# Short Call EV Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sophisticated Expected Value (EV) calculator for short call options positions. Built for options traders to analyze risk/reward and tail risk scenarios.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Real-time EV Calculation**: Instant computation as you adjust parameters
+- **Tail Risk Analysis**: Configure worst-case scenarios with customizable Z-sigma cutoffs
+- **Probability Analysis**: Visual breakdown of profit/loss probabilities using normal distribution
+- **Indian Market Ready**: INR formatting with Indian number system (lakhs/crores)
+- **Professional UI**: Clean, financial terminal-inspired design
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** with TypeScript
+- **Vite** for fast development and builds
+- **Tailwind CSS v4** for styling
+- **shadcn/ui** components
+- **Framer Motion** for animations
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Install dependencies
+npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# Start development server
+npm run dev
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Build for production
+npm run build
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Input Parameters
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Parameter | Description |
+|-----------|-------------|
+| Spot Price | Current index/stock price |
+| Strike Price | OTM strike for short call |
+| Premium Received | Premium collected per unit |
+| Implied Volatility | Annual IV percentage |
+| Days to Expiry | Calendar days until expiration |
+| Lot Size x Lots | Position size calculation |
+| Tail Cutoff (Z-sigma) | Worst-case sigma level for loss calculation |
+
+### Output Metrics
+
+- **1 sigma Move**: Expected one standard deviation price movement
+- **Z-Score**: Number of standard deviations to strike
+- **Probability of Profit/Loss**: Based on normal distribution
+- **Max Profit**: Premium x Units
+- **Tail Max Loss**: Loss at specified Z-sigma level
+- **EV per Trade**: Expected value considering probabilities
+
+## Calculation Methodology
+
+The calculator uses a simplified Black-Scholes framework:
+
+1. **Volatility Scaling**: `sigma_period = IV x sqrt(days/365)`
+2. **Z-Score**: `z = (Strike - Spot) / sigma_period`
+3. **Probabilities**: Using cumulative normal distribution (CDF)
+4. **EV**: `P(profit) x MaxProfit - P(loss) x TailLoss`
+
+## License
+
+MIT
